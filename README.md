@@ -38,59 +38,27 @@ ready to be pushed to GitHub.
    pip install pandas numpy scipy
    ```
 
-2. **Load molecular constants**
+2. **Load the reference constants**
 
    ```python
    from pathlib import Path
    from richet_rpfr import load_molecular_constants_from_excel
 
    constants = load_molecular_constants_from_excel(
-       Path("data/raw/excel/Richet - RPFR & mol constans.xlsx"),
-       sheet_name="Diatoms updated (Table 5.2)",
+       Path("data/processed/spreadsheets/Richet - RPFR & mol constans - diatoms.xlsx"),
+       sheet_name="Diatoms (Table 5)",
    )
-   co = constants["12C16O"]
+   NSI_H2 = constants["1H1H"]
+   SSI_HD = constants["1H2H"]
    ```
 
-3. **Generate isotopic variants**
-
-   ```python
-   from richet_rpfr import generate_isotopic_variants, is_most_common_isotopologue
-
-   variants = []
-   for name, mc in constants.items():
-       if is_most_common_isotopologue(name):
-           variants.extend(generate_isotopic_variants(mc))
-   ```
-
-4. **Compute RPFRs**
+3. **Compute RPFR contributions**
 
    ```python
    from richet_rpfr import PartitionFunctionCalculator
 
-   nsi = constants["1H1H"]
-   ssi = constants["1H2H"]
-   calc = PartitionFunctionCalculator(temperature=273.15, NSI=nsi, SSI=ssi)
+   T_0C = 273.15
+   calc = PartitionFunctionCalculator(temperature=T_0C, NSI=NSI_H2, SSI=SSI_HD)
    calc.calculate_all()
-   print(calc.Q_tot)
+   calc.print_contribution_table()
    ```
-
-5. **Compare against Richet (1977)**
-
-   ```python
-   from richet_rpfr import (
-       compute_and_finalize_with_temp,
-       create_summary_df,
-       compare_experimental_and_computed,
-   )
-   ```
-
-   See `notebooks/02_table4_replication.ipynb` for a worked example that recreates Table 4 and
-   benchmarks the experimental data once the `richet_rpfr` package is on the Python path.
-
-## Next steps
-
-- Add tests or scripts under `scripts/` for automated verification.
-
-## Licensing
-
-Add license information here before publishing the repository.

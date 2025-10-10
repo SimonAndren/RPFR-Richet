@@ -1,0 +1,22 @@
+# Byte-compiled / cache files
+__pycache__/
+*.py[cod]
+
+# Notebooks
+.ipynb_checkpoints/
+
+# Virtual environments
+.venv/
+env/
+venv/
+
+# Gaussian scratch / large outputs
+*.chk
+*.log~
+
+# macOS
+.DS_Store
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+gaussian_resources/

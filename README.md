@@ -1,8 +1,8 @@
 # Richet RPFR Replication
 
-This repository reorganises the original notebooks, Gaussian logs, and helper scripts used to
-reproduce the reduced partition function ratios (RPFR) reported by Richet *et al.* (1977).
-It is structured for collaboration and ready to be pushed to GitHub.
+This repository reorganises notebooks and helper scripts used to reproduce the reduced partition
+function ratios (RPFR) reported by Richet *et al.* (1977). It is structured for collaboration and
+ready to be pushed to GitHub.
 
 ## Repository layout
 
@@ -21,9 +21,6 @@ It is structured for collaboration and ready to be pushed to GitHub.
 │   ├── compare_to_richet.py
 │   ├── compute_partition_functions.py
 │   └── load_molecular_constants.py
-├── gaussian_resources
-│   ├── experiments/                   # Gaussian notebooks, logs, and inputs (staged for archival)
-│   └── src/gaussian_support/          # Gaussian helpers that depend on external tooling
 └── src
     └── richet_rpfr/                   # Shareable Python package
         ├── isotopes.py                # Isotope masses & label helpers
@@ -40,9 +37,6 @@ It is structured for collaboration and ready to be pushed to GitHub.
    ```bash
    pip install pandas numpy scipy
    ```
-
-   The Gaussian helpers (kept in `gaussian_resources/`) additionally require `rdkit-pypi`; install it
-   only if you intend to regenerate Gaussian inputs.
 
 2. **Load molecular constants**
 
@@ -93,16 +87,9 @@ It is structured for collaboration and ready to be pushed to GitHub.
    See `notebooks/02_table4_replication.ipynb` for a worked example that recreates Table 4 and
    benchmarks the experimental data once the `richet_rpfr` package is on the Python path.
 
-## Gaussian experiments
-
-All Gaussian-specific material—including notebooks, generated inputs, log files, and the legacy
-helpers—now lives under `gaussian_resources/`. Copy or archive that directory if you need the
-Gaussian workflows; it can then be removed entirely before publishing the main project.
-
 ## Next steps
 
 - Add tests or scripts under `scripts/` for automated verification.
-- Review and trim `gaussian_resources/` before publishing a public snapshot.
 
 ## Licensing
 

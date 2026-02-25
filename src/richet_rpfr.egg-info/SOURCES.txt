@@ -1,0 +1,17 @@
+README.md
+pyproject.toml
+src/richet_rpfr/__init__.py
+src/richet_rpfr/comparison.py
+src/richet_rpfr/isotopes.py
+src/richet_rpfr/molecular_constants.py
+src/richet_rpfr/partition_functions.py
+src/richet_rpfr/richet_tables.py
+src/richet_rpfr.egg-info/PKG-INFO
+src/richet_rpfr.egg-info/SOURCES.txt
+src/richet_rpfr.egg-info/dependency_links.txt
+src/richet_rpfr.egg-info/requires.txt
+src/richet_rpfr.egg-info/top_level.txt
+tests/test_comparison.py
+tests/test_isotopes.py
+tests/test_molecular_constants.py
+tests/test_partition_functions.py

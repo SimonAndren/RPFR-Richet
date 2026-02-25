@@ -12,9 +12,14 @@ from .molecular_constants import (
     MolecularConstants,
     load_molecular_constants_from_excel,
     load_molecular_constants_from_fit_output,
+    load_experimental_constants,
+    load_amila_rpfr,
+    generate_all_variants,
     canonicalize_isotopologue,
     is_most_common_isotopologue,
     generate_isotopic_variants,
+    load_benchmark_we,
+    build_benchmark_parents,
 )
 from .partition_functions import PartitionFunctionCalculator
 from .richet_tables import (
@@ -22,13 +27,22 @@ from .richet_tables import (
     create_summary_df,
     create_diff_series,
 )
-from .comparison import compare_experimental_and_computed
+from .comparison import (
+    compare_experimental_and_computed,
+    compute_experimental_rpfr,
+    compare_amila_to_experimental,
+    compute_benchmark_rpfr,
+    AMILA_CONTRIB_COLS,
+)
 
 __all__ = [
     "isotopes",
     "MolecularConstants",
     "load_molecular_constants_from_excel",
     "load_molecular_constants_from_fit_output",
+    "load_experimental_constants",
+    "load_amila_rpfr",
+    "generate_all_variants",
     "canonicalize_isotopologue",
     "is_most_common_isotopologue",
     "generate_isotopic_variants",
@@ -37,4 +51,10 @@ __all__ = [
     "create_summary_df",
     "create_diff_series",
     "compare_experimental_and_computed",
+    "compute_experimental_rpfr",
+    "compare_amila_to_experimental",
+    "compute_benchmark_rpfr",
+    "load_benchmark_we",
+    "build_benchmark_parents",
+    "AMILA_CONTRIB_COLS",
 ]

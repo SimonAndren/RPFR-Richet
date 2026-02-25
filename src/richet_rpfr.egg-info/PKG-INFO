@@ -1,0 +1,75 @@
+Metadata-Version: 2.4
+Name: richet-rpfr
+Version: 0.1.0
+Summary: Utilities for replicating Richet et al. (1977) RPFR tables
+Author: Simon Andren
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+Requires-Dist: numpy
+Requires-Dist: pandas
+Requires-Dist: scipy
+
+# Richet RPFR Replication
+
+This repository reorganises notebooks and helper scripts used to reproduce the reduced partition
+function ratios (RPFR) reported by Richet *et al.* (1977). It is structured for collaboration and
+ready to be pushed to GitHub.
+
+## Repository layout
+
+```
+.
+├── data
+│   ├── raw
+│   │   └── excel/                     # Primary experimental constants (Table 5)
+│   └── processed
+│       └── spreadsheets/              # Derived isotopologue tables & comparisons
+├── notebooks
+│   ├── 01_rpfr_h2_example.ipynb
+│   ├── 02_table4_replication.ipynb
+│   └── 03_rpfr_ccsdt_example.ipynb
+├── scripts
+│   ├── compare_to_richet.py
+│   ├── compute_partition_functions.py
+│   └── load_molecular_constants.py
+└── src
+    └── richet_rpfr/                   # Shareable Python package
+        ├── isotopes.py                # Isotope masses & label helpers
+        ├── molecular_constants.py     # Excel loaders & scaling utilities
+        ├── partition_functions.py     # RPFR contribution calculator
+        ├── richet_tables.py           # Richet table replication helpers
+        └── comparison.py              # Experimental vs. computed comparisons
+```
+
+## How to use
+
+1. **Install dependencies**
+
+   ```bash
+   pip install pandas numpy scipy
+   ```
+
+2. **Load the reference constants**
+
+   ```python
+   from pathlib import Path
+   from richet_rpfr import load_molecular_constants_from_excel
+
+   constants = load_molecular_constants_from_excel(
+       Path("data/processed/spreadsheets/Richet - RPFR & mol constans - diatoms.xlsx"),
+       sheet_name="Diatoms (Table 5)",
+   )
+   NSI_H2 = constants["1H1H"]
+   SSI_HD = constants["1H2H"]
+   ```
+
+3. **Compute RPFR contributions**
+
+   ```python
+   from richet_rpfr import PartitionFunctionCalculator
+
+   T_0C = 273.15
+   calc = PartitionFunctionCalculator(temperature=T_0C, NSI=NSI_H2, SSI=SSI_HD)
+   calc.calculate_all()
+   calc.print_contribution_table()
+   ```
